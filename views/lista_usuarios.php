@@ -5,7 +5,6 @@ require_once('../models/conexao.php');
 $sql = "SELECT * FROM usuarios";
 $result = $conexao->query($sql);
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -34,10 +33,10 @@ $result = $conexao->query($sql);
                     echo "<td>" . $row['nome'] . "</td>";
                     echo "<td>" . $row['email'] . "</td>";
                     echo "<td>" . $row['tipo'] . "</td>";
-                    echo "<td>";
-                    echo "<a href='editar_usuario.php?id=" . $row['id'] . "'>Editar</a> | ";
-                    echo "<a href='../controllers/UsuarioController.php?acao=excluir&id=" . $row['id'] . "' onclick='return confirm(\"Deseja excluir este usuário?\");'>Excluir</a>";
-                    echo "</td>";
+                    echo "<td>
+                            <a href='editar_usuario.php?id=" . $row['id'] . "'>Editar</a> |
+                            <a href='../controllers/UsuarioController.php?acao=excluir&id=" . $row['id'] . "' onclick='return confirm(\"Deseja excluir este usuário?\")'>Excluir</a>
+                          </td>";
                     echo "</tr>";
                 }
             } else {
