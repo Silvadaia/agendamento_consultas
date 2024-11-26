@@ -1,15 +1,18 @@
 <?php
-$servername = "localhost";
-$username = "root"; // Usuário padrão do XAMPP
-$password = ""; // Senha geralmente vazia no XAMPP
-$dbname = "agendamento_consultas"; // Nome do banco de dados
+// Configurações do banco de dados
+$host = 'localhost'; // Host do banco
+$usuario = 'root'; // Usuário do banco
+$senha = ''; // Senha do banco (deixe vazio se não houver)
+$banco = 'agendamento_consultas'; // Nome do banco de dados
 
-// Criando a conexão
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Cria a conexão
+$conexao = new mysqli($host, $usuario, $senha, $banco);
 
-// Checando a conexão
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
+// Verifica se há erros na conexão
+if ($conexao->connect_error) {
+    die("Falha na conexão: " . $conexao->connect_error);
 }
 ?>
+
+
 
