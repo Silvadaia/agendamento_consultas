@@ -1,20 +1,35 @@
-# Plataforma de Agendamento de Consultas Online
+# Plataforma de Agendamento de Consultas
 
-Este é um projeto desenvolvido como parte do trabalho de conclusão de curso (TCC) em Engenharia de Software. A plataforma tem como objetivo facilitar o agendamento de consultas médicas, permitindo que pacientes realizem marcações de forma prática e que os profissionais de saúde gerenciem seus horários de maneira eficiente.
+Este projeto é uma aplicação simples desenvolvida em PHP com MySQL e Bootstrap para gerenciamento de agendamentos de consultas médicas.
 
 ## Funcionalidades
-- Cadastro de usuários (pacientes e profissionais de saúde)
-- Agendamento de consultas
-- Gerenciamento de horários dos profissionais
+
+- Cadastro de usuários
+- Login de usuários
+- Agendamento de novas consultas
 - Visualização de consultas agendadas
+- Histórico de consultas com opções de **remarcar** e **cancelar**
+- Logout do sistema
 
 ## Tecnologias Utilizadas
-- **Back-end:** PHP
-- **Banco de Dados:** MySQL
-- **Front-end:** HTML, CSS, Bootstrap
-- **Controle de Versão:** Git/GitHub
 
-## Como Executar o Projeto
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/Silvadaia/agendamento_online.git
+- PHP
+- MySQL
+- HTML5 / CSS3
+- Bootstrap
+- Git & GitHub
+
+## Como rodar o projeto localmente
+
+1. Instale o [XAMPP](https://www.apachefriends.org/index.html)
+2. Coloque a pasta do projeto em `C:\xampp\htdocs\`
+3. Inicie o Apache e o MySQL pelo painel do XAMPP
+4. Crie o banco de dados com o nome `nome_do_banco` e importe o arquivo `.sql` se houver
+5. Acesse via navegador:  
+   `http://localhost/agendamento_consultas/views/index.php`
+
+## Desenvolvido por
+
+Daiane Silva – Projeto de TCC  
+Curso de Engenharia de Software  
+
