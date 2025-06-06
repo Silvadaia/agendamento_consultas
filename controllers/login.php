@@ -20,6 +20,7 @@ if ($stmt) {
             $_SESSION['usuario_id'] = $usuario['id'];
             $_SESSION['usuario_nome'] = $usuario['nome'];
             $_SESSION['usuario_tipo'] = $usuario['tipo'];
+            $_SESSION['usuario_especialidade'] = $usuario['especialidade']; // adicionada
 
             header("Location: ../views/dashboard.php");
             exit();
@@ -33,3 +34,4 @@ if ($stmt) {
     echo "Erro ao preparar a consulta.";
 }
 ?>
+

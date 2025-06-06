@@ -1,19 +1,19 @@
 <?php 
 session_start();
+include_once '../models/config.php';
+
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: form_login.php");
     exit();
 }
 
-include_once '../models/config.php';
-
-// Busca consultas do usuário logado
 $usuario_id = $_SESSION['usuario_id'];
+
 $sql = "SELECT * FROM consultas WHERE usuario_id = ? ORDER BY data DESC, hora DESC";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $usuario_id);
 $stmt->execute();
-$resultado = $stmt->get_result();
+$result = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -24,39 +24,39 @@ $resultado = $stmt->get_result();
     <link rel="stylesheet" href="../assets/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="container mt-5">
-        <h2 class="mb-4">📅 Histórico de Consultas</h2>
-        <a href="dashboard.php" class="btn btn-secondary mb-3">⬅ Voltar ao Menu</a>
+<body class="bg-light">
+<div class="container mt-5">
+    <h2 class="mb-4">📋 Histórico de Consultas</h2>
+    <a href="dashboard.php" class="btn btn-secondary mb-3">← Voltar ao Menu</a>
 
-        <?php if ($resultado->num_rows > 0): ?>
-            <table class="table table-bordered table-striped">
-                <thead class="table-primary">
+    <?php if ($result->num_rows > 0): ?>
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Data</th>
+                    <th>Hora</th>
+                    <th>Observações</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = $result->fetch_assoc()): ?>
                     <tr>
-                        <th>Data</th>
-                        <th>Hora</th>
-                        <th>Observações</th>
-                        <th>Ações</th>
+                        <td><?= htmlspecialchars($row['data']) ?></td>
+                        <td><?= htmlspecialchars($row['hora']) ?></td>
+                        <td><?= htmlspecialchars($row['observacoes']) ?></td>
+                        <td>
+                            <a href="../controllers/remarcar.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Remarcar</a>
+                            <a href="../controllers/cancelar.php?id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja cancelar esta consulta?');">Cancelar</a>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    <?php while($consulta = $resultado->fetch_assoc()): ?>
-                        <tr>
-                            <td><?php echo $consulta['data']; ?></td>
-                            <td><?php echo $consulta['hora']; ?></td>
-                            <td><?php echo $consulta['observacoes']; ?></td>
-                            <td>
-                                <a href="../views/remarcar.php?id=<?php echo $consulta['id']; ?>" class="btn btn-sm btn-outline-primary">Remarcar</a>
-                                <a href="../views/cancelar.php?id=<?php echo $consulta['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja cancelar esta consulta?');">Cancelar</a>
-                            </td>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
-        <?php else: ?>
-            <p class="text-muted">🔍 Nenhuma consulta encontrada.</p>
-        <?php endif; ?>
-    </div>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <div class="alert alert-info">🔍 Nenhum histórico de consulta encontrado.</div>
+    <?php endif; ?>
+</div>
 </body>
 </html>
 
